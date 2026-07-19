@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  ═══════════════════════════════════════════════════════════════
+  DANTE & CAMI — 19 DECEMBER 2026 · MENDOZA
+  ═══════════════════════════════════════════════════════════════
+  FILL-IN CHECKLIST — search this file for "tbd" to find every blank.
+  Placeholders appear on the page as amber dashed chips.
+
+  STILL TO FILL:
+  1. Pre-wedding time & place → id="weekend", day 17 chips
+  2. RSVP deadline            → id="rsvp"
+  3. IBAN                     → id="gifts"
+     ⚠ A public GitHub repo means the IBAN is public too.
+  4. FAQ: plus-ones & kids    → id="faq"
+
+  DONE:
+  ✓ Date & hours: 19 Dec 2026, 18:00–05:00 (CONFIG in the <script>)
+  ✓ Venue: Villa Elina, Terrada 4348, Chacras de Coria (+ Maps link)
+  ✓ Contact emails in RSVP
+  ✓ RSVP form wired to FormSubmit → dfmartinezcaram@gmail.com
+    ONE-TIME ACTIVATION: once the site is online, submit the form
+    once; FormSubmit emails a confirmation link to that address —
+    click it and all future RSVPs arrive by email automatically.
+  ✓ Calendar buttons: Google Calendar + iCal (.ics)
+
+  NOTE: the separate inner-circle (#familia) page was removed on
+  request — everything now lives on this single page.
+  ═══════════════════════════════════════════════════════════════
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dante &amp; Cami — 19 December 2026 · Mendoza</title>
+<meta name="description" content="Dante & Cami are getting married in Mendoza, Argentina on 19 December 2026. Travel guide, schedule and RSVP for guests coming from abroad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root{
+  --paper:#F6F3EE;
+  --paper-2:#EFEAE1;
+  --ink:#2B2430;
+  --ink-soft:#645B69;
+  --malbec:#6E2136;
+  --malbec-deep:#471523;
+  --andes:#46597A;
+  --brass:#A0763A;
+  --sun:#C9992F;
+  --line:#DAD3C7;
+  --tbd-bg:#FBF1D8;
+  --tbd-border:#C9992F;
+  --tbd-ink:#79570F;
+  --radius:12px;
+  --max:1040px;
+  --font-display:"Fraunces",Georgia,serif;
+  --font-body:"Archivo",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.65;
+  font-size:16.5px;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:var(--malbec)}
+:focus-visible{outline:2px solid var(--andes);outline-offset:3px;border-radius:4px}
+.skip-link{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:2000}
+.skip-link:focus{left:8px}
+
+/* ─── Scroll progress ────────────────────────────────────── */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0;
+  background:linear-gradient(90deg,var(--malbec),var(--sun));
+  z-index:1100;
+}
+
+/* ─── Type helpers ───────────────────────────────────────── */
+.eyebrow{
+  font-size:.72rem;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--malbec);margin-bottom:14px;
+}
+h2{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;
+  letter-spacing:-.01em;margin-bottom:14px;
+}
+h2 em{font-style:italic;color:var(--malbec)}
+.lede{color:var(--ink-soft);max-width:56ch;margin-bottom:40px}
+h3{font-family:var(--font-body);font-weight:600;font-size:1.02rem;letter-spacing:.01em}
+
+/* ─── TBD chips ──────────────────────────────────────────── */
+.tbd{
+  display:inline-block;background:var(--tbd-bg);
+  border:1.5px dashed var(--tbd-border);color:var(--tbd-ink);
+  font-size:.78rem;font-weight:600;letter-spacing:.03em;
+  padding:2px 10px;border-radius:999px;
+  white-space:nowrap;vertical-align:middle;
+}
+.tbd-block{
+  background:var(--tbd-bg);border:1.5px dashed var(--tbd-border);
+  color:var(--tbd-ink);border-radius:var(--radius);
+  padding:14px 18px;font-size:.9rem;font-weight:500;
+}
+
+/* ─── Nav ────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-logo{
+  font-family:var(--font-display);font-size:1.25rem;font-weight:500;
+  color:var(--ink);text-decoration:none;letter-spacing:.02em;
+}
+.nav-logo em{font-style:italic;color:var(--malbec)}
+.nav-links{list-style:none;display:flex;gap:24px;align-items:center}
+.nav-links a{
+  color:var(--ink);text-decoration:none;font-size:.82rem;
+  font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--malbec)}
+.nav-links a.nav-cta{
+  background:var(--malbec);color:#fff;padding:8px 18px;border-radius:999px;
+  transition:background .2s;
+}
+.nav-links a.nav-cta:hover{background:var(--malbec-deep);color:#fff}
+.nav-toggle{
+  display:none;background:none;border:none;cursor:pointer;
+  font-family:var(--font-body);font-weight:600;font-size:.82rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+  padding:8px 4px;
+}
+@media (max-width:880px){
+  .nav-toggle{display:block}
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;background:var(--paper);
+    border-bottom:1px solid var(--line);padding:8px 0 16px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links li{width:100%;text-align:center}
+  .nav-links a{display:block;padding:12px}
+  .nav-links a.nav-cta{display:inline-block;margin-top:8px}
+}
+
+/* ─── Hero ───────────────────────────────────────────────── */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 60px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:86px 22px 22px;
+  border:1px solid var(--line);border-radius:4px;pointer-events:none;
+}
+.hero::after{
+  content:"";position:absolute;inset:92px 28px 28px;
+  border:1px solid color-mix(in srgb,var(--line) 55%,transparent);
+  border-radius:2px;pointer-events:none;
+}
+.hero-eyebrow{
+  font-size:.75rem;font-weight:600;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--brass);margin-bottom:26px;
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(3.2rem,11vw,7.5rem);line-height:1.02;letter-spacing:-.015em;
+}
+.hero h1 .amp{font-style:italic;color:var(--malbec);font-weight:300}
+.ridge-scene{width:min(480px,74vw);margin:26px auto 22px}
+.ridge-scene .sun{color:var(--sun)}
+.ridge-scene .ridge-path{color:var(--andes)}
+.hero-date{
+  font-family:var(--font-display);font-weight:300;
+  font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:.04em;
+}
+.hero-date .year{color:var(--ink-soft)}
+.hero-place{
+  font-size:.8rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--ink-soft);margin:12px 0 40px;
+}
+.countdown{display:flex;align-items:stretch;margin-bottom:44px}
+.cd{padding:0 26px;text-align:center}
+.cd + .cd{border-left:1px solid var(--line)}
+.cd .n{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.7rem,4.5vw,2.5rem);color:var(--malbec);display:block;
+  font-variant-numeric:tabular-nums;line-height:1.15;
+}
+.cd .l{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:600;
+  font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:14px 30px;border-radius:999px;
+  transition:background .25s,color .25s,border-color .25s,transform .25s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--malbec);color:#fff}
+.btn-solid:hover{background:var(--malbec-deep)}
+.btn-ghost{border:1.5px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--malbec);color:var(--malbec)}
+.hero-note{margin-top:46px;font-size:.85rem;color:var(--ink-soft);max-width:44ch}
+
+/* hero entrance sequence */
+.rise{opacity:0;transform:translateY(18px);animation:rise .9s cubic-bezier(.22,.8,.36,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.rise.d1{animation-delay:.05s}.rise.d2{animation-delay:.18s}
+.rise.d3{animation-delay:.34s}.rise.d4{animation-delay:.48s}
+.rise.d5{animation-delay:.62s}.rise.d6{animation-delay:.76s}
+/* sun rises behind the ridge on load */
+.sun-group{animation:sunrise 2s .5s cubic-bezier(.3,.7,.3,1) both}
+@keyframes sunrise{from{transform:translateY(26px);opacity:0}to{transform:none;opacity:1}}
+/* ridgeline draws itself */
+.ridge-path{stroke-dasharray:1100;stroke-dashoffset:1100;animation:draw 1.9s .3s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (max-width:600px){.cd{padding:0 14px}}
+
+/* ─── Sections & dividers ────────────────────────────────── */
+.section{padding:96px 24px}
+.section-inner{max-width:var(--max);margin:0 auto}
+.section.alt{background:var(--paper-2)}
+.ridge-divider{max-width:var(--max);margin:0 auto;padding:0 24px;color:var(--line)}
+.ridge-divider svg{width:100%;height:34px}
+
+/* ─── Weekend timeline ───────────────────────────────────── */
+.weekend{display:flex;flex-direction:column}
+.day{
+  display:grid;grid-template-columns:150px 1fr;gap:30px;
+  padding:34px 0;border-top:1px solid var(--line);
+}
+.day:last-child{border-bottom:1px solid var(--line)}
+.day-num{
+  font-family:var(--font-display);font-weight:300;
+  font-size:3.4rem;line-height:1;color:var(--malbec);
+}
+.day-num small{
+  display:block;font-family:var(--font-body);font-size:.72rem;
+  font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-soft);margin-top:8px;
+}
+.day-body h3{font-size:1.15rem;margin-bottom:6px;font-family:var(--font-display);font-weight:500}
+.day-body p{color:var(--ink-soft);font-size:.95rem;max-width:60ch}
+.day-meta{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cal-link{
+  font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--andes);text-decoration:none;border-bottom:1px solid currentColor;
+  padding-bottom:1px;
+}
+.cal-link:hover{color:var(--malbec)}
+@media (max-width:640px){
+  .day{grid-template-columns:1fr;gap:10px}
+  .day-num{font-size:2.6rem}
+  .day-num small{display:inline;margin-left:10px}
+}
+
+/* ─── Venue ──────────────────────────────────────────────── */
+.venue-card{
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:#fff;overflow:hidden;
+  display:grid;grid-template-columns:1.1fr 1fr;
+}
+.venue-main{padding:44px}
+.venue-main h3{font-family:var(--font-display);font-weight:500;font-size:1.7rem;margin-bottom:10px}
+.venue-main p{color:var(--ink-soft);font-size:.95rem}
+.venue-main .btn{margin-top:26px}
+.venue-facts{
+  background:var(--malbec-deep);color:#F3E9E3;padding:44px;
+  display:flex;flex-direction:column;gap:18px;justify-content:center;
+}
+.venue-fact{display:flex;gap:14px;font-size:.92rem;line-height:1.5}
+.venue-fact .k{
+  flex:0 0 86px;font-size:.68rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:#C9A24B;padding-top:3px;
+}
+.venue-fact .tbd{white-space:normal}
+@media (max-width:760px){.venue-card{grid-template-columns:1fr}}
+
+/* ─── Card grids ─────────────────────────────────────────── */
+.grid{display:grid;gap:18px}
+.grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;transition:border-color .3s,box-shadow .3s;
+}
+.card:hover{
+  border-color:color-mix(in srgb,var(--malbec) 45%,var(--line));
+  box-shadow:0 14px 34px rgba(43,36,48,.08);
+}
+.section.alt .card{background:var(--paper)}
+.card h3{margin-bottom:8px}
+.card p{color:var(--ink-soft);font-size:.92rem}
+.card .k{
+  display:block;font-size:.68rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--brass);margin-bottom:10px;
+}
+.card .foot{margin-top:14px;font-size:.8rem;font-weight:600;color:var(--andes)}
+.route-note{margin-top:18px;font-size:.88rem;color:var(--ink-soft)}
+.route-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:50%;border:1.5px solid var(--brass);
+  color:var(--brass);font-size:.75rem;font-weight:700;margin-right:8px;
+  vertical-align:-4px;
+}
+
+/* ─── Stay ───────────────────────────────────────────────── */
+.hotel .price{
+  display:inline-block;margin:8px 0 10px;font-size:.78rem;font-weight:600;
+  color:var(--malbec);border:1px solid var(--malbec);
+  padding:2px 10px;border-radius:999px;
+}
+.stay-note{
+  margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);
+  background:#fff;padding:24px 26px;display:flex;gap:18px;align-items:flex-start;
+}
+.section.alt .stay-note{background:var(--paper)}
+.stay-note .ridge-mini{flex:0 0 46px;color:var(--andes);opacity:.6;padding-top:6px}
+.stay-note p{color:var(--ink-soft);font-size:.92rem}
+.fineprint{margin-top:18px;font-size:.8rem;color:var(--ink-soft);font-style:italic}
+
+/* ─── Restaurants ────────────────────────────────────────── */
+.resto{
+  display:grid;grid-template-columns:1fr auto;gap:6px 18px;
+  padding:20px 0;border-top:1px solid var(--line);align-items:baseline;
+  transition:padding-left .3s;
+}
+.resto:hover{padding-left:10px}
+.resto:last-of-type{border-bottom:1px solid var(--line)}
+.resto h3{font-family:var(--font-display);font-weight:500;font-size:1.1rem}
+.resto .where{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+.resto p{grid-column:1/-1;color:var(--ink-soft);font-size:.9rem;max-width:64ch}
+.resto .price{font-weight:600;color:var(--malbec);font-size:.85rem;letter-spacing:.1em}
+
+/* ─── Dress code ─────────────────────────────────────────── */
+.dress-card{
+  background:var(--andes);color:#EEF1F6;border-radius:var(--radius);
+  padding:56px 44px;text-align:center;
+}
+.dress-card .eyebrow{color:#C9A24B}
+.dress-card h2{color:#fff}
+.dress-card h2 em{color:#C9A24B}
+.dress-card p{max-width:58ch;margin:0 auto;font-size:.97rem;color:#D9DFEA}
+.dress-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+.dress-tag{
+  border:1px solid rgba(255,255,255,.35);color:#fff;
+  padding:7px 18px;border-radius:999px;font-size:.8rem;font-weight:500;
+  transition:background .25s;
+}
+.dress-tag:hover{background:rgba(255,255,255,.12)}
+
+/* ─── FAQ ────────────────────────────────────────────────── */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:20px 36px 20px 0;position:relative;
+  font-family:var(--font-display);font-weight:500;font-size:1.08rem;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  font-family:var(--font-body);font-weight:400;font-size:1.4rem;color:var(--brass);
+  transition:transform .25s;
+}
+.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq details p{color:var(--ink-soft);font-size:.93rem;max-width:64ch;padding:0 0 22px}
+
+/* ─── Gifts ──────────────────────────────────────────────── */
+.gift-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:48px 40px;text-align:center;max-width:640px;margin:0 auto;
+}
+.gift-card p{color:var(--ink-soft);font-size:.95rem;max-width:52ch;margin:0 auto 26px}
+.iban{
+  font-family:ui-monospace,Menlo,monospace;font-size:.95rem;letter-spacing:.12em;
+  border:1.5px dashed var(--tbd-border);background:var(--tbd-bg);color:var(--tbd-ink);
+  border-radius:10px;padding:16px;margin-bottom:14px;
+}
+.gift-note{font-size:.8rem;color:var(--ink-soft);font-style:italic}
+
+/* ─── RSVP ───────────────────────────────────────────────── */
+.rsvp-wrap{
+  background:var(--malbec-deep);border-radius:var(--radius);
+  color:#F3E9E3;padding:56px 44px;
+  display:grid;grid-template-columns:1fr 1.2fr;gap:48px;
+}
+.rsvp-wrap .eyebrow{color:#C9A24B}
+.rsvp-wrap h2{color:#fff}
+.rsvp-wrap h2 em{color:#C9A24B}
+.rsvp-intro p{color:#E3D3CC;font-size:.95rem;margin-bottom:18px}
+.rsvp-form{display:flex;flex-direction:column;gap:16px}
+.field label{
+  display:block;font-size:.7rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:#C9A24B;margin-bottom:7px;
+}
+.field input,.field textarea{
+  width:100%;padding:13px 16px;border-radius:10px;border:1px solid transparent;
+  background:#F6F3EE;color:var(--ink);font-family:var(--font-body);font-size:.95rem;
+}
+.field textarea{min-height:84px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:2px solid #C9A24B;outline-offset:1px}
+.attend{display:flex;gap:12px}
+.attend-btn{
+  flex:1;padding:13px;border-radius:10px;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.4);background:transparent;color:#fff;
+  font-family:var(--font-body);font-weight:600;font-size:.9rem;transition:all .2s;
+}
+.attend-btn:hover{border-color:#fff}
+.attend-btn.active{background:#F6F3EE;color:var(--malbec-deep);border-color:#F6F3EE}
+.rsvp-form .btn{border:none;cursor:pointer;font-family:var(--font-body);align-self:flex-start;background:#C9A24B;color:var(--malbec-deep)}
+.rsvp-form .btn:hover{background:#DDBA68}
+.form-status{font-size:.85rem;min-height:1.2em}
+@media (max-width:820px){.rsvp-wrap{grid-template-columns:1fr;padding:40px 26px}}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+footer{border-top:1px solid var(--line);padding:56px 24px 40px;text-align:center}
+.footer-names{font-family:var(--font-display);font-weight:400;font-size:1.6rem}
+.footer-names em{font-style:italic;color:var(--malbec)}
+footer .ridge{width:200px;margin:18px auto;color:var(--andes);opacity:.5}
+footer p{font-size:.85rem;color:var(--ink-soft)}
+
+/* ─── Small additions ────────────────────────────────────── */
+.time-badge{
+  display:inline-block;font-weight:600;font-size:.82rem;letter-spacing:.06em;
+  color:var(--malbec);border:1.5px solid var(--malbec);
+  padding:3px 12px;border-radius:999px;
+}
+.resto h3 a{color:inherit;text-decoration:none;transition:color .2s}
+.resto h3 a:hover{color:var(--malbec)}
+.rsvp-intro a{color:#DDBA68}
+
+/* ─── Reveal on scroll ───────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal,.rise,.sun-group,.ridge-path{opacity:1;transform:none;animation:none;transition:none}
+  .ridge-path{stroke-dashoffset:0}
+  .btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#weekend">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top">Dante <em>&amp;</em> Cami</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#weekend">The plan</a></li>
+      <li><a href="#venue">Venue</a></li>
+      <li><a href="#travel">Getting here</a></li>
+      <li><a href="#around">Around</a></li>
+      <li><a href="#stay">Stay</a></li>
+      <li><a href="#mendoza">Mendoza</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#rsvp" class="nav-cta">RSVP</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     VIEW 1 · MAIN PAGE — FOR ALL GUESTS
+     ════════════════════════════════════════════════════════ -->
+<main id="view-general">
+
+<!-- ═══ HERO ═══ -->
+<header class="hero" id="top">
+  <p class="hero-eyebrow rise d1">¡Nos casamos! · We're getting married</p>
+  <h1 class="rise d2">Dante <span class="amp">&amp;</span> Cami</h1>
+
+  <!-- Summer sun rising over the Andes -->
+  <svg class="ridge-scene rise d3" viewBox="0 0 480 96" fill="none" aria-hidden="true">
+    <g class="sun-group">
+      <circle class="sun" cx="336" cy="52" r="17" stroke="currentColor" stroke-width="1.4"/>
+      <g class="sun" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+        <line x1="336" y1="24" x2="336" y2="18"/>
+        <line x1="360" y1="34" x2="364.5" y2="29.5"/>
+        <line x1="312" y1="34" x2="307.5" y2="29.5"/>
+      </g>
+    </g>
+    <!-- paper mask so the sun sits behind the ridge -->
+    <path d="M0 80 L44 62 L70 72 L108 50 L146 70 L184 58 L224 76 L264 46 L304 68 L342 42 L380 64 L414 54 L450 72 L480 60 L480 96 L0 96 Z" fill="#F6F3EE"/>
+    <path class="ridge-path" d="M0 80 L44 62 L70 72 L108 50 L146 70 L184 58 L224 76 L264 46 L304 68 L342 42 L380 64 L414 54 L450 72 L480 60"
+          stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  </svg>
+
+  <p class="hero-date rise d4">19 December <span class="year" id="hero-year"></span></p>
+  <p class="hero-place rise d4">Chacras de Coria · Mendoza · Argentina</p>
+
+  <div class="countdown rise d5" id="countdown" aria-label="Countdown to the wedding">
+    <div class="cd"><span class="n" id="cd-days">–</span><span class="l">days</span></div>
+    <div class="cd"><span class="n" id="cd-hours">–</span><span class="l">hours</span></div>
+    <div class="cd"><span class="n" id="cd-mins">–</span><span class="l">min</span></div>
+    <div class="cd"><span class="n" id="cd-secs">–</span><span class="l">sec</span></div>
+  </div>
+
+  <div class="hero-ctas rise d6">
+    <a class="btn btn-solid" href="#rsvp">RSVP</a>
+    <a class="btn btn-ghost" href="#travel">Plan your trip</a>
+  </div>
+
+  <p class="hero-note rise d6">You're travelling a long way to be with us — this page has everything you need: the plan, the place, and how to make the most of a Mendoza summer.</p>
+</header>
+
+<!-- ═══ THE WEEKEND ═══ -->
+<div class="section" id="weekend">
+  <div class="section-inner">
+    <p class="eyebrow">The plan</p>
+    <h2>Three <em>days</em></h2>
+    <p class="lede">Plan to be in Mendoza by the 16th, so you can settle in before it all begins. Anything still marked in amber will be filled in soon.</p>
+
+    <div class="weekend">
+      <div class="day reveal">
+        <div class="day-num">17<small>Dec · Thursday</small></div>
+        <div class="day-body">
+          <h3>Pre-wedding gathering</h3>
+          <p>A relaxed evening to welcome everyone who's made the trip. Details will be shared personally with invited guests.</p>
+          <div class="day-meta">
+            <span class="tbd">time — to confirm</span>
+            <span class="tbd">place — to confirm</span>
+          </div>
+        </div>
+      </div>
+      <div class="day reveal">
+        <div class="day-num">18<small>Dec · Friday</small></div>
+        <div class="day-body">
+          <h3>Free day — rest &amp; explore</h3>
+          <p>Catch your breath, visit a bodega, cool off in a pool, or enjoy a long Mendocino lunch under the vines. The big day is tomorrow.</p>
+        </div>
+      </div>
+      <div class="day reveal">
+        <div class="day-num">19<small>Dec · Saturday</small></div>
+        <div class="day-body">
+          <h3>The wedding</h3>
+          <p>Ceremony, dinner and a proper Argentine party under the summer stars — from six in the evening until five in the morning.</p>
+          <div class="day-meta">
+            <span class="time-badge">18:00 → 05:00</span>
+            <a class="cal-link" target="_blank" rel="noopener"
+               href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Dante%20%26%20Cami%20%E2%80%94%20Wedding&amp;dates=20261219T210000Z/20261220T080000Z&amp;location=Villa%20Elina%2C%20Terrada%204348%2C%20Chacras%20de%20Coria%2C%20Mendoza%2C%20Argentina&amp;details=Dante%20%26%20Cami%27s%20wedding%20%E2%80%94%20details%20on%20the%20wedding%20site">
+               + Google Calendar</a>
+            <a class="cal-link" href="#" id="ics-link">+ iCal / Outlook (.ics)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ridge-divider" aria-hidden="true"><svg viewBox="0 0 1200 34" fill="none" preserveAspectRatio="none"><path d="M0 28 L90 14 L150 22 L240 6 L330 20 L420 12 L520 26 L610 8 L700 20 L790 4 L880 18 L960 11 L1050 24 L1120 15 L1200 26" stroke="currentColor" stroke-width="1.3"/></svg></div>
+
+<!-- ═══ VENUE ═══ -->
+<div class="section" id="venue">
+  <div class="section-inner">
+    <p class="eyebrow">The place</p>
+    <h2>The <em>venue</em></h2>
+    <div class="venue-card reveal">
+      <div class="venue-main">
+        <h3>Villa Elina</h3>
+        <p>
+          Terrada 4348<br>
+          Chacras de Coria<br>
+          M5507 Mendoza, Argentina
+        </p>
+        <a class="btn btn-ghost" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&amp;query=Villa%20Elina%20Terrada%204348%20Chacras%20de%20Coria%20Mendoza">
+          Open in Google Maps →</a>
+      </div>
+      <div class="venue-facts">
+        <div class="venue-fact"><span class="k">Where</span><span>Chacras de Coria — a leafy village in Mendoza's wine country, about 20 minutes from the city centre.</span></div>
+        <div class="venue-fact"><span class="k">Season</span><span>December is high summer: hot, dry, sunny days around 30&nbsp;°C, warm golden evenings, and the sun setting close to nine.</span></div>
+        <div class="venue-fact"><span class="k">Hours</span><span>18:00 until 05:00 — come ready to dance.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GETTING HERE ═══ -->
+<div class="section alt" id="travel">
+  <div class="section-inner">
+    <p class="eyebrow">Travel</p>
+    <h2>Getting <em>here</em></h2>
+    <p class="lede">Mendoza (MDZ) sits at the foot of the Andes in western Argentina. From Europe it's one stop away — these are the routes we'd recommend, in order.</p>
+
+    <div class="grid cols-2">
+      <div class="card reveal">
+        <span class="k"><span class="route-num">1</span>Via Buenos Aires</span>
+        <h3>Ezeiza (EZE) → Mendoza</h3>
+        <p>The main gateway: most long-haul flights from Europe land at Ezeiza, with onward domestic flights to Mendoza (~1&nbsp;h&nbsp;50). One caution — some connections depart from the other city airport, Aeroparque (AEP). Check both codes on your ticket and allow 3–4 hours if you need to transfer between them.</p>
+        <p class="foot">Plus: a chance to see Buenos Aires</p>
+      </div>
+      <div class="card reveal">
+        <span class="k"><span class="route-num">2</span>Via São Paulo</span>
+        <h3>Guarulhos (GRU) → Mendoza</h3>
+        <p>Often the smoothest option: São Paulo has excellent connections from Europe, and there are direct flights on to Mendoza (LATAM and Gol) — no airport change, one clean transfer.</p>
+        <p class="foot">GRU → MDZ direct: ~3 h</p>
+      </div>
+      <div class="card reveal">
+        <span class="k"><span class="route-num">3</span>Via Lima</span>
+        <h3>Lima (LIM) → Mendoza</h3>
+        <p>Also worth checking: LATAM flies direct from Lima to Mendoza, and Lima connects well from Madrid, Amsterdam and other European hubs.</p>
+        <p class="foot">One-stop from Europe</p>
+      </div>
+      <div class="card reveal">
+        <span class="k"><span class="route-num">4</span>Via Santiago</span>
+        <h3>Santiago (SCL) → Mendoza</h3>
+        <p>The hop over the Andes is short and spectacular, but connection times from Europe tend to be awkward — treat this as the backup if the routes above don't work for your dates.</p>
+        <p class="foot">Last resort — check timings</p>
+      </div>
+    </div>
+
+    <p class="route-note"><strong>Coming from North America?</strong> Copa flies direct Panama City → Mendoza — often the easiest single connection. And once you've landed: Uber and Cabify work well in Mendoza and are inexpensive — install one before you fly, including for the airport ride (~20 min to the city). Tell us your flight details in the RSVP and we'll try to coordinate pick-ups and shared rides.</p>
+    <p class="fineprint">Book early — December is Argentine summer high season and the week before Christmas, so fares climb fast.</p>
+  </div>
+</div>
+
+<!-- ═══ GETTING AROUND ═══ -->
+<div class="section" id="around">
+  <div class="section-inner">
+    <p class="eyebrow">Mobility</p>
+    <h2>Getting <em>around</em></h2>
+    <p class="lede">Mendoza is an easy city to move around in — three options, depending on your plans.</p>
+    <div class="grid cols-3">
+      <div class="card reveal">
+        <span class="k">Recommended</span>
+        <h3>Uber &amp; Cabify</h3>
+        <p>Our default advice. Rides are cheap compared to northern Europe, cars arrive quickly in both the city and Chacras, and nobody has to skip the wine. Install one of the apps before you fly.</p>
+        <p class="foot">City ↔ Chacras: a few euros</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Local style</span>
+        <h3>Public transport</h3>
+        <p>Mendoza runs on buses — "colectivos" — plus the Metrotranvía, a light-rail line through the city. You pay with a rechargeable SUBE card from any kiosk; cash isn't accepted on board. Cheap and fine by day, less practical for Chacras at night.</p>
+        <p class="foot">Get a SUBE card at any kiosko</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Freedom</span>
+        <h3>Rent a car</h3>
+        <p>The best way to roam the bodegas, the mountains and the Valle de Uco at your own pace. Our recommendation: <a href="https://www.instagram.com/malbec.rentacar/" target="_blank" rel="noopener">Malbec Rent a Car</a>. If you're wine tasting, name a designated driver — alcohol limits here are strict.</p>
+        <p class="foot">Book ahead for December</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STAY ═══ -->
+<div class="section alt" id="stay">
+  <div class="section-inner">
+    <p class="eyebrow">Sleep</p>
+    <h2>Where to <em>stay</em></h2>
+    <p class="lede">Two good options: stay in the city (more restaurants and life on your doorstep) or out in the wine country near the venue (vineyards, pools and quiet).</p>
+
+    <div class="grid cols-2">
+      <div class="card hotel reveal">
+        <span class="k">City centre</span>
+        <h3>Park Hyatt Mendoza</h3>
+        <span class="price">~US$150–200 / night</span>
+        <p>The classic five-star on Plaza Independencia. Pool, great service and a famous wine bar.</p>
+      </div>
+      <div class="card hotel reveal">
+        <span class="k">City centre</span>
+        <h3>Diplomatic Hotel</h3>
+        <span class="price">~US$80–120 / night</span>
+        <p>Comfortable four-star with excellent value, well located for restaurants and cafés.</p>
+      </div>
+      <div class="card hotel reveal">
+        <span class="k">Wine country</span>
+        <h3>Cavas Wine Lodge</h3>
+        <span class="price">~US$300–400 / night</span>
+        <p>Boutique lodge set among the vines with Andes views — the full wine-country romance.</p>
+      </div>
+      <div class="card hotel reveal">
+        <span class="k">Wine country</span>
+        <h3>Entre Cielos</h3>
+        <span class="price">~US$200–300 / night</span>
+        <p>Design hotel with a beautiful spa (including a proper hamam), pool and vineyard views.</p>
+      </div>
+    </div>
+
+    <div class="stay-note reveal">
+      <svg class="ridge-mini" viewBox="0 0 46 24" fill="none" aria-hidden="true"><path d="M0 20 L10 8 L17 14 L26 4 L34 13 L40 9 L46 16" stroke="currentColor" stroke-width="1.4"/></svg>
+      <p><strong>Airbnb?</strong> A great option here — houses with gardens and pools abound. Two areas to search: <strong>Chacras de Coria</strong> (the village of the venue, walking distance to the celebration) or <strong>5ta Sección</strong> (leafy, elegant city district beside Parque San Martín).</p>
+    </div>
+    <p class="fineprint">Prices are rough guides — check current rates, and book early for December.</p>
+  </div>
+</div>
+
+<div class="ridge-divider" aria-hidden="true"><svg viewBox="0 0 1200 34" fill="none" preserveAspectRatio="none"><path d="M0 26 L80 12 L160 22 L250 5 L340 19 L430 10 L530 25 L620 7 L710 21 L800 4 L890 17 L980 10 L1070 23 L1200 14" stroke="currentColor" stroke-width="1.3"/></svg></div>
+
+<!-- ═══ GOOD TO KNOW ═══ -->
+<div class="section" id="tips">
+  <div class="section-inner">
+    <p class="eyebrow">Practicalities</p>
+    <h2>Good to <em>know</em></h2>
+    <p class="lede">A few things that make Argentina easier for first-time visitors.</p>
+
+    <div class="grid cols-3">
+      <div class="card reveal">
+        <span class="k">Money</span>
+        <h3>Cards + some cash</h3>
+        <p>Cards and contactless are widely accepted and give a fair rate. For pesos, bring some USD or EUR and change them at an official casa de cambio in the city centre (several around Av. San Martín) — never with street changers, and skip the airport counters. A Western Union transfer to yourself, picked up in pesos, is another favourite trick.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Sun</span>
+        <h3>Desert summer</h3>
+        <p>Mendoza is high desert: expect ~30&nbsp;°C, fierce sun and very dry air. Sunscreen, a hat, sunglasses and constant water are non-negotiable. Evenings stay pleasantly warm, though it turns fresher out toward the mountains — Chacras included — so a light layer helps late at night.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Phone</span>
+        <h3>eSIM or local SIM</h3>
+        <p>An eSIM (Airalo, Holafly, etc.) set up before you fly is the easiest. Everything in Argentina runs on WhatsApp — make sure you have it.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Power</span>
+        <h3>220 V, Type I / C plugs</h3>
+        <p>Argentina uses the slanted three-pin Type I sockets (Type C often fits too). Bring an adapter — hotels rarely have spares.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Language</span>
+        <h3>Spanish first</h3>
+        <p>English is spoken at hotels and wineries, less so elsewhere. A few words of Spanish (and a smile) go a very long way with Mendocinos.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Rhythm</span>
+        <h3>Siesta &amp; late dinners</h3>
+        <p>Many shops close for siesta in the afternoon and reopen around five. Dinner starts from 21:00, parties end at sunrise, and tipping ~10% in restaurants is customary. Adjust your body clock.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ THINGS TO DO ═══ -->
+<div class="section alt" id="mendoza">
+  <div class="section-inner">
+    <p class="eyebrow">Make a trip of it</p>
+    <h2>Mendoza in <em>summer</em></h2>
+    <p class="lede">Since you're crossing the world for us, stay a few extra days. December means long golden evenings, vineyards in full leaf and the Andes at their most dramatic.</p>
+
+    <div class="grid cols-3">
+      <div class="card reveal">
+        <span class="k">Wine</span>
+        <h3>Bodegas &amp; tastings</h3>
+        <p>This is Argentina's wine capital. Zuccardi (Valle de Uco), Catena Zapata and El Enemigo are favourites — most visits include a long paired lunch with Andes views. December is busy: book well ahead.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Two wheels</span>
+        <h3>Bike through Maipú</h3>
+        <p>Rent a bike and roll from vineyard to vineyard, stopping for tastings and olive oil along the way. One of Mendoza's most loved days out — go in the morning before the heat peaks.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Adventure</span>
+        <h3>Rafting in Potrerillos</h3>
+        <p>An hour from the city, the Mendoza River runs high with summer snowmelt — white-water rafting and kayaking against a wall of mountains. Easy to book as a half-day trip.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Mountains</span>
+        <h3>Alta montaña day trip</h3>
+        <p>Drive Ruta 7 toward Chile: the Potrerillos reservoir, Uspallata, Puente del Inca and viewpoints of Aconcagua — the highest peak in the Americas. Summer is exactly the season for it.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Thermal</span>
+        <h3>Cacheuta hot springs</h3>
+        <p>Thermal pools built into a mountain canyon, 40 minutes from the city — the spa side is calmer than the water park. A perfect slow day between celebrations.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">Spa</span>
+        <h3>A slow spa day</h3>
+        <p>Two we love: the hamam and vinotherapy at <strong>Entre Cielos</strong> (Vistalba), and <strong>Sumac Spa</strong> in Chacras (Viamonte 4134) for massages minutes from the venue. Book ahead — December fills up.</p>
+      </div>
+      <div class="card reveal">
+        <span class="k">City &amp; village</span>
+        <h3>Mendoza &amp; Chacras</h3>
+        <p>Tree-lined streets, Plaza Independencia, the enormous Parque San Martín and serious café culture in the city — and in Chacras, a pretty plaza, weekend market and slow lunches.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESTAURANTS ═══ -->
+<div class="section" id="eat">
+  <div class="section-inner">
+    <p class="eyebrow">Eat &amp; drink</p>
+    <h2>Where to <em>eat</em></h2>
+    <p class="lede">A short list we'd take our friends to — in the city and around Chacras. We'll keep adding to it.</p>
+
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=La%20Marchigiana%20Mendoza" target="_blank" rel="noopener">La Marchigiana</a> <span class="where">· city centre</span></h3>
+      <span class="price">$$</span>
+      <p>A Mendoza institution since the 1950s — Italian home cooking brought over by immigrants from Le Marche. Order the sorrentinos.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=Siete%20Cocinas%20Mendoza" target="_blank" rel="noopener">Siete Cocinas</a> <span class="where">· city centre</span></h3>
+      <span class="price">$$</span>
+      <p>Regional Argentine cooking — one menu drawing on the country's seven culinary regions. Creative without being fussy.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=Casa%20El%20Enemigo%20Maip%C3%BA%20Mendoza" target="_blank" rel="noopener">Casa El Enemigo</a> <span class="where">· maipú</span></h3>
+      <span class="price">$$$</span>
+      <p>The restaurant of the El Enemigo winery — long tasting lunches paired with their celebrated wines. Book well in advance.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=Bodega%20Ruca%20Mal%C3%A9n%20Mendoza" target="_blank" rel="noopener">Ruca Malén</a> <span class="where">· wine country</span></h3>
+      <span class="price">$$$</span>
+      <p>Winery restaurant with vineyard-and-Andes views. The step-by-step paired lunch is a Mendoza rite of passage.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=El%20Para%C3%ADso%20de%20Chacras%20Chacras%20de%20Coria" target="_blank" rel="noopener">El Paraíso de Chacras</a> <span class="where">· chacras de coria</span></h3>
+      <span class="price">$$</span>
+      <p>A charming local spot near the venue — relaxed lunches and dinners with a very Chacras, very unhurried feel.</p>
+    </div>
+
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=Del%20Monte%20lomos%20Viamonte%205060%20Chacras%20de%20Coria" target="_blank" rel="noopener">Del Monte</a> <span class="where">· chacras de coria</span></h3>
+      <span class="price">$</span>
+      <p>For lomos — Mendoza's beloved grilled steak sandwich — this is one of the most popular lomiterías in the province, and it's right in Chacras. They're enormous; order one to share.</p>
+    </div>
+
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=La%20Gloria%20Cantina%20Mitre%201541%20Chacras%20de%20Coria" target="_blank" rel="noopener">La Gloria</a> <span class="where">· chacras de coria</span></h3>
+      <span class="price">$$</span>
+      <p>A "cantina cool" on calle Mitre — café, wine shop, market and restó in one, with house vermouths and a lovely patio. One of the best-loved spots in the village.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=Smash%20Chacras%20de%20Coria" target="_blank" rel="noopener">Smash</a> <span class="where">· chacras de coria</span></h3>
+      <span class="price">$</span>
+      <p>Smash burgers for the night you need a break from steak — quick, casual and very good.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=Lo%20de%20Brown%20Almirante%20Brown%20y%20Viamonte%20Chacras%20de%20Coria" target="_blank" rel="noopener">Lo de Brown</a> <span class="where">· chacras de coria</span></h3>
+      <span class="price">$</span>
+      <p>Classic corner bodegón at Almirante Brown y Viamonte: abundant Argentine comfort food — the matambre and empanadas are the stars — with a garden the kids can run around in. Hugely popular, so expect a wait.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=La%20Central%20Vermuter%C3%ADa%20Mendoza" target="_blank" rel="noopener">La Central Vermutería</a> <span class="where">· city centre</span></h3>
+      <span class="price">$$</span>
+      <p>For the vermut hour — Argentina's favourite pre-dinner ritual. Vermouth on tap, picadas to share, and the perfect warm-up before a late dinner in the centre.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=La%20Luc%C3%ADa%20restaurante%20Av.%20Sarmiento%20658%20Mendoza" target="_blank" rel="noopener">La Lucía</a> <span class="where">· city centre</span></h3>
+      <span class="price">$$$</span>
+      <p>Refined parrilla on Av. Sarmiento — superb steaks from the Josper grill, house pastas, a deep wine cellar and polished old-school service. One for a special night.</p>
+    </div>
+    <div class="resto reveal">
+      <h3><a href="https://www.google.com/maps/search/?api=1&amp;query=Soberana%20restaurante%20Av.%20Sarmiento%20Mendoza" target="_blank" rel="noopener">Soberana</a> <span class="where">· city centre</span></h3>
+      <span class="price">$$$</span>
+      <p>Michelin-Guide-selected bistro two blocks from Plaza Independencia — Argentine roots with French, Italian and Spanish touches, a glass-fronted wine cellar and serious cocktails.</p>
+    </div>
+
+    <p class="fineprint">Price guide: $ everyday · $$ mid-range · $$$ special occasion.</p>
+  </div>
+</div>
+
+<!-- ═══ DRESS CODE ═══ -->
+<div class="section alt" id="dresscode">
+  <div class="section-inner">
+    <div class="dress-card reveal">
+      <p class="eyebrow">What to wear</p>
+      <h2>Dress <em>code</em></h2>
+      <p>Think <strong>elegant</strong> — Argentines dress up properly for weddings — but above all wear something you'll feel wonderful in. There's no colour scheme and no strict rules.</p>
+      <p style="margin-top:14px"><strong>One thing that matters:</strong> it's high summer, around 30&nbsp;°C. Go for elegant <em>and breathable</em> — light fabrics you can dance in until sunrise. Evenings stay warm, though a light layer never hurts late at night.</p>
+      <div class="dress-tags">
+        <span class="dress-tag">Elegant</span>
+        <span class="dress-tag">No colour restrictions</span>
+        <span class="dress-tag">Summer fabrics</span>
+        <span class="dress-tag">Made for dancing</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="section" id="faq">
+  <div class="section-inner">
+    <p class="eyebrow">Questions</p>
+    <h2>Before you <em>ask</em></h2>
+    <p class="lede">The things everyone wants to know. Anything missing? Just write to us.</p>
+
+    <div class="faq reveal">
+      <details>
+        <summary>When should I book flights?</summary>
+        <p>As soon as you can. December is Argentine summer high season <em>and</em> the week before Christmas — fares climb quickly and the good connections sell out first.</p>
+      </details>
+      <details>
+        <summary>Do I need a visa for Argentina?</summary>
+        <p>Most EU, UK and US passport holders can enter Argentina visa-free as tourists for up to 90 days. Rules vary by nationality, so double-check the current requirements for your passport before booking.</p>
+      </details>
+      <details>
+        <summary>Staying on for Christmas or New Year?</summary>
+        <p>Lovely idea — just know that on 24–25 and 31 December most restaurants and shops close for family celebrations, so book those dinners ahead. Midnight on both nights means fireworks across the whole city.</p>
+      </details>
+      <details>
+        <summary>Can I bring a plus-one? Are kids welcome?</summary>
+        <p><span class="tbd">answer — to confirm</span></p>
+      </details>
+      <details>
+        <summary>What language will the ceremony be in?</summary>
+        <p>In Spanish. If yours is a little rusty, don't worry — you'll understand everything that matters, and we'll make sure you're never lost.</p>
+      </details>
+      <details>
+        <summary>Is Mendoza safe?</summary>
+        <p>Yes — Mendoza is generally among Argentina's more relaxed cities, and Chacras de Coria even more so. Just use normal big-city sense in the centre: keep your phone off café tables, mind your bag in crowds, and prefer Uber late at night.</p>
+      </details>
+      <details>
+        <summary>Is it easy to get around at night?</summary>
+        <p>Yes — Uber and Cabify run late in Mendoza and Chacras, though after a big night rides can take a little longer to arrive. We'll also help coordinate shared rides after the party.</p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GIFTS ═══ -->
+<div class="section alt" id="gifts">
+  <div class="section-inner">
+    <p class="eyebrow">Gifts</p>
+    <h2>Your presence <em>is</em> the present</h2>
+    <div class="gift-card reveal">
+      <p>Truly — crossing an ocean to celebrate with us is more than enough. But if you'd like to contribute to our next adventure, you're welcome to make a transfer.</p>
+      <div class="iban">IBAN — to confirm <!-- tbd: replace with real IBAN, or remove this box and keep only the line below --></div>
+      <p class="gift-note">Prefer to keep bank details off the internet? Just write to us and we'll send them privately.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RSVP ═══ -->
+<div class="section" id="rsvp">
+  <div class="section-inner">
+    <div class="rsvp-wrap reveal">
+      <div class="rsvp-intro">
+        <p class="eyebrow">RSVP</p>
+        <h2>Are you <em>coming?</em></h2>
+        <p>Please reply by <span class="tbd">date — to confirm</span> so we can plan properly for everyone travelling.</p>
+        <p>Questions about flights, dates or anything else? Write to <a href="mailto:dfmartinezcaram@gmail.com">dfmartinezcaram@gmail.com</a> or <a href="mailto:camilasenetiner@gmail.com">camilasenetiner@gmail.com</a>.</p>
+      </div>
+
+      <!-- RSVP form → FormSubmit (formsubmit.co), delivering to
+           dfmartinezcaram@gmail.com.
+           ONE-TIME ACTIVATION: once the site is online, submit the form
+           once — FormSubmit emails a confirmation link to that address.
+           Click it, and every RSVP after that lands in the inbox. -->
+      <form class="rsvp-form" id="rsvp-form" action="https://formsubmit.co/dfmartinezcaram@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New RSVP — Dante &amp; Cami">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="field">
+          <label for="f-names">Your name(s)</label>
+          <input id="f-names" type="text" name="names" placeholder="Full names of everyone attending" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" type="email" name="email" placeholder="So we can reply to you" required>
+        </div>
+        <div class="field">
+          <label id="attend-label">Will you be there?</label>
+          <div class="attend" role="group" aria-labelledby="attend-label">
+            <button type="button" class="attend-btn" data-value="yes">Yes, count us in</button>
+            <button type="button" class="attend-btn" data-value="no">Sadly, no</button>
+          </div>
+          <input type="hidden" name="attending" id="f-attending" value="">
+        </div>
+        <div class="field">
+          <label for="f-diet">Dietary needs</label>
+          <textarea id="f-diet" name="dietary" placeholder="Allergies or restrictions we should know about (leave blank if none)"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-msg">A message for us (optional)</label>
+          <textarea id="f-msg" name="message" placeholder="Flight plans, questions, a song that will get you dancing…"></textarea>
+        </div>
+        <button type="submit" class="btn">Send RSVP</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER (general) ═══ -->
+<footer>
+  <p class="footer-names">Dante <em>&amp;</em> Cami</p>
+  <svg class="ridge" viewBox="0 0 200 24" fill="none" aria-hidden="true"><path d="M0 20 L28 8 L48 15 L74 4 L100 14 L126 6 L152 16 L176 9 L200 17" stroke="currentColor" stroke-width="1.3"/></svg>
+  <p>19 December <span id="footer-year"></span> · Chacras de Coria · Mendoza, Argentina</p>
+  <p style="margin-top:8px">Made with love, for our favourite people.</p>
+</footer>
+</main>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   CONFIG — the only place you need to edit the date & time
+   ══════════════════════════════════════════════════════════ */
+var CONFIG = {
+  /* 19 December 2026, 18:00–05:00, Argentina time (UTC−3) — confirmed. */
+  weddingDate: '2026-12-19T18:00:00-03:00'
+};
+
+var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── Year display ── */
+(function(){
+  var y = new Date(CONFIG.weddingDate).getFullYear();
+  var el1 = document.getElementById('hero-year');
+  var el2 = document.getElementById('footer-year');
+  if (el1) el1.textContent = y;
+  if (el2) el2.textContent = y;
+})();
+
+/* ── Countdown ── */
+(function(){
+  var target = new Date(CONFIG.weddingDate).getTime();
+  var box = document.getElementById('countdown');
+  var d = document.getElementById('cd-days'),
+      h = document.getElementById('cd-hours'),
+      m = document.getElementById('cd-mins'),
+      s = document.getElementById('cd-secs');
+  function tick(){
+    var diff = target - Date.now();
+    if (diff <= 0){
+      box.innerHTML = '<div class="cd"><span class="n">¡Hoy!</span><span class="l">Today is the day</span></div>';
+      clearInterval(timer);
+      return;
+    }
+    d.textContent = Math.floor(diff / 86400000);
+    h.textContent = Math.floor(diff % 86400000 / 3600000);
+    m.textContent = Math.floor(diff % 3600000 / 60000);
+    s.textContent = Math.floor(diff % 60000 / 1000);
+  }
+  var timer = setInterval(tick, 1000);
+  tick();
+})();
+
+/* ── iCal / Outlook (.ics) download ── */
+(function(){
+  var link = document.getElementById('ics-link');
+  if (!link) return;
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    var ics = [
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Dante y Cami//Wedding//EN',
+      'BEGIN:VEVENT',
+      'UID:dante-cami-20261219@wedding',
+      'DTSTAMP:20260719T120000Z',
+      'DTSTART:20261219T210000Z',
+      'DTEND:20261220T080000Z',
+      'SUMMARY:Dante & Cami - Wedding',
+      'LOCATION:Villa Elina\, Terrada 4348\, Chacras de Coria\, Mendoza\, Argentina',
+      'DESCRIPTION:Details on the wedding site',
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'dante-cami-wedding.ics';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 500);
+  });
+})();
+
+/* ── Scroll progress bar + gentle hero parallax ── */
+(function(){
+  var bar = document.getElementById('progress');
+  var scene = document.querySelector('.ridge-scene');
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+      if (scene && !reducedMotion && window.scrollY < window.innerHeight){
+        scene.style.transform = 'translateY(' + window.scrollY * 0.12 + 'px)';
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ── Mobile nav ── */
+(function(){
+  var btn = document.querySelector('.nav-toggle');
+  var links = document.getElementById('nav-links');
+  btn.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.addEventListener('click', function(e){
+    if (e.target.tagName === 'A'){
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    }
+  });
+})();
+
+/* ── RSVP: yes/no buttons + inline submit ── */
+(function(){
+  var hidden = document.getElementById('f-attending');
+  var btns = document.querySelectorAll('.attend-btn');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      btns.forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      hidden.value = b.dataset.value;
+    });
+  });
+
+  var form = document.getElementById('rsvp-form');
+  var status = document.getElementById('form-status');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!hidden.value){
+      status.textContent = 'Please tell us whether you can make it.';
+      return;
+    }
+    status.textContent = 'Sending…';
+    fetch('https://formsubmit.co/ajax/dfmartinezcaram@gmail.com', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r){
+      if (r.ok){
+        form.innerHTML = '<p style="font-size:1.05rem">Thank you — we\u2019ve received your RSVP. See you in Mendoza. 🥂</p>';
+      } else {
+        status.textContent = 'Something went wrong — please try again, or just message us directly.';
+      }
+    }).catch(function(){
+      status.textContent = 'No connection — please try again, or just message us directly.';
+    });
+  });
+})();
+
+/* ── Staggered reveal on scroll ── */
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (reducedMotion){
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  /* stagger siblings inside grids and lists */
+  document.querySelectorAll('.grid, .weekend, .faq, .sched').forEach(function(group){
+    Array.prototype.forEach.call(group.children, function(child, i){
+      if (child.classList.contains('reveal') || child.querySelector('.reveal')){
+        child.style.transitionDelay = (i % 4) * 90 + 'ms';
+      }
+    });
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+        /* clear the delay afterwards so hover effects stay snappy */
+        setTimeout(function(){ en.target.style.transitionDelay = ''; }, 1200);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
