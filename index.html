@@ -37,7 +37,7 @@
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dante &amp; Cami — 19 December 2026 · Mendoza</title>
+<title>Cami &amp; Dante — 19 December 2026 · Mendoza</title>
 <meta name="description" content="Dante & Cami are getting married in Mendoza, Argentina on 19 December 2026. Travel guide, schedule and RSVP for guests coming from abroad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -180,40 +180,14 @@ nav{
   font-size:.75rem;font-weight:600;letter-spacing:.28em;
   text-transform:uppercase;color:var(--brass);margin-bottom:26px;
 }
-/* ─── Hero photo & scrim ─────────────────────────────────── */
-.hero-photo{
-  position:absolute;inset:-90px 0;width:100%;height:calc(100% + 180px);
-  object-fit:cover;object-position:center 30%;
-  z-index:0;pointer-events:none;will-change:transform;
-}
-.hero-scrim{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,
-    rgba(30,20,26,.22) 0%,
-    rgba(30,20,26,.34) 42%,
-    rgba(30,20,26,.66) 78%,
-    rgba(30,20,26,.82) 100%);
-}
-.hero.has-photo > *{position:relative;z-index:2}
-.hero.has-photo::before{border-color:rgba(255,255,255,.4)}
-.hero.has-photo::after{border-color:rgba(255,255,255,.22)}
-.hero.has-photo .hero-eyebrow{color:#DDBA68}
-.hero.has-photo h1{color:#fff}
-.hero.has-photo h1 .amp{color:#DDBA68}
-.hero.has-photo .hero-date{color:#fff}
-.hero.has-photo .hero-date .year{color:rgba(255,255,255,.7)}
-.hero.has-photo .hero-place{color:rgba(255,255,255,.85)}
-.hero.has-photo .cd .n{color:#fff}
-.hero.has-photo .cd .l{color:rgba(255,255,255,.62)}
-.hero.has-photo .cd + .cd{border-left-color:rgba(255,255,255,.25)}
-.hero.has-photo .btn-ghost{border-color:#fff;color:#fff}
-.hero.has-photo .btn-ghost:hover{border-color:#DDBA68;color:#DDBA68}
-.hero.has-photo .hero-note{color:rgba(255,255,255,.78)}
 .hero h1{
   font-family:var(--font-display);font-weight:300;
   font-size:clamp(3.2rem,11vw,7.5rem);line-height:1.02;letter-spacing:-.015em;
 }
 .hero h1 .amp{font-style:italic;color:var(--malbec);font-weight:300}
+.ridge-scene{width:min(480px,74vw);margin:26px auto 22px}
+.ridge-scene .sun{color:var(--sun)}
+.ridge-scene .ridge-path{color:var(--andes)}
 .hero-date{
   font-family:var(--font-display);font-weight:300;
   font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:.04em;
@@ -252,6 +226,29 @@ nav{
 .rise.d1{animation-delay:.05s}.rise.d2{animation-delay:.18s}
 .rise.d3{animation-delay:.34s}.rise.d4{animation-delay:.48s}
 .rise.d5{animation-delay:.62s}.rise.d6{animation-delay:.76s}
+/* sun rises behind the ridge on load */
+.sun-group{animation:sunrise 2s .5s cubic-bezier(.3,.7,.3,1) both}
+@keyframes sunrise{from{transform:translateY(26px);opacity:0}to{transform:none;opacity:1}}
+/* ridgeline draws itself */
+.ridge-path{stroke-dasharray:1100;stroke-dashoffset:1100;animation:draw 1.9s .3s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+/* framed engagement photo */
+.photo-band{padding:26px 24px 10px}
+.photo-frame{
+  max-width:var(--max);margin:0 auto;position:relative;
+  background:#fff;border:1px solid var(--line);border-radius:4px;
+  padding:10px;
+}
+.photo-frame::after{
+  content:"";position:absolute;inset:16px;pointer-events:none;
+  border:1px solid rgba(255,255,255,.55);border-radius:2px;
+}
+.photo-frame img{
+  width:100%;height:clamp(340px,62vh,560px);
+  object-fit:cover;object-position:50% 55%;
+  border-radius:2px;
+}
+@media (max-width:600px){.photo-frame img{height:clamp(300px,52vh,420px)}}
 @media (max-width:600px){.cd{padding:0 14px}}
 
 /* ─── Sections & dividers ────────────────────────────────── */
@@ -481,7 +478,8 @@ footer p{font-size:.85rem;color:var(--ink-soft)}
 /* ─── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .reveal,.rise{opacity:1;transform:none;animation:none;transition:none}
+  .reveal,.rise,.sun-group,.ridge-path{opacity:1;transform:none;animation:none;transition:none}
+  .ridge-path{stroke-dashoffset:0}
   .btn:hover{transform:none}
 }
 </style>
@@ -514,12 +512,25 @@ footer p{font-size:.85rem;color:var(--ink-soft)}
 <main id="view-general">
 
 <!-- ═══ HERO ═══ -->
-<header class="hero has-photo" id="top">
-  <img class="hero-photo" src="engagement.jpg" alt="Dante and Cami smiling together by a river in the Andean foothills" loading="eager" fetchpriority="high">
-  <div class="hero-scrim" aria-hidden="true"></div>
-
+<header class="hero" id="top">
   <p class="hero-eyebrow rise d1">¡Nos casamos! · We're getting married</p>
   <h1 class="rise d2">Dante <span class="amp">&amp;</span> Cami</h1>
+
+  <!-- Summer sun rising over the Andes -->
+  <svg class="ridge-scene rise d3" viewBox="0 0 480 96" fill="none" aria-hidden="true">
+    <g class="sun-group">
+      <circle class="sun" cx="336" cy="52" r="17" stroke="currentColor" stroke-width="1.4"/>
+      <g class="sun" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+        <line x1="336" y1="24" x2="336" y2="18"/>
+        <line x1="360" y1="34" x2="364.5" y2="29.5"/>
+        <line x1="312" y1="34" x2="307.5" y2="29.5"/>
+      </g>
+    </g>
+    <!-- paper mask so the sun sits behind the ridge -->
+    <path d="M0 80 L44 62 L70 72 L108 50 L146 70 L184 58 L224 76 L264 46 L304 68 L342 42 L380 64 L414 54 L450 72 L480 60 L480 96 L0 96 Z" fill="#F6F3EE"/>
+    <path class="ridge-path" d="M0 80 L44 62 L70 72 L108 50 L146 70 L184 58 L224 76 L264 46 L304 68 L342 42 L380 64 L414 54 L450 72 L480 60"
+          stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  </svg>
 
   <p class="hero-date rise d4">19 December <span class="year" id="hero-year"></span></p>
   <p class="hero-place rise d4">Chacras de Coria · Mendoza · Argentina</p>
@@ -538,6 +549,13 @@ footer p{font-size:.85rem;color:var(--ink-soft)}
 
   <p class="hero-note rise d6">You're travelling a long way to be with us — this page has everything you need: the plan, the place, and how to make the most of a Mendoza summer.</p>
 </header>
+
+<!-- ═══ THE PHOTO ═══ -->
+<div class="photo-band">
+  <figure class="photo-frame reveal">
+    <img src="engagement.jpg" alt="Dante and Cami smiling by a river in the Andean foothills, ring on display" loading="lazy">
+  </figure>
+</div>
 
 <!-- ═══ THE WEEKEND ═══ -->
 <div class="section" id="weekend">
@@ -1116,7 +1134,7 @@ var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matche
 /* ── Scroll progress bar + gentle hero parallax ── */
 (function(){
   var bar = document.getElementById('progress');
-  var scene = document.querySelector('.hero-photo');
+  var scene = document.querySelector('.ridge-scene');
   var ticking = false;
   function onScroll(){
     if (ticking) return;
